@@ -55,12 +55,12 @@ def qa_model(query,key):
 with st.form("ASK"):
     query=st.text_input("Enter Your Query?",placeholder="What are transformers")
     x=st.form_submit_button("submit")
-if x:
-    if aikey==False:
-        with st.warning():
-            st.write("Please Enter AI Key to Proceed!")
-    else:
+    
+if aikey:
+    if x:
         result=qa_model(query,aikey)
         st.write(result)
+else:
+    st.warning("Enter the api key")
 
 

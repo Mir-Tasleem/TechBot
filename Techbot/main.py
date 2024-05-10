@@ -10,9 +10,8 @@ from langchain_openai import ChatOpenAI
 import streamlit as st
 
 
-st.title("TechBot Transformers")
-with st.sidebar:
-    aikey=st.text_input("Enter key",placeholder="openai_api_key",type="password")
+
+
 
 def qa_model(query,key):
     # Load, chunk and index the contents of the blog.
@@ -29,11 +28,15 @@ def qa_model(query,key):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     splits = text_splitter.split_documents(docs)
     OPENAI_API_KEY=key
-    embeddings=OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
-    vectorstore = Chroma.from_documents(documents=splits, embedding=embeddings)
+    try:
+        embeddings=OpenAIEmbeddings(openai_api_key=key)
+        vectorstore = Chroma.from_documents(documents=splits, embedding=embeddings)
+    except:
+        st.warning("Provide your api key")
+    
 
     # Retrieve and generate using the relevant snippets of the blog.
-    llm = ChatOpenAI(model="gpt-3.5-turbo-0125",openai_api_key=OPENAI_API_KEY)
+    llm = ChatOpenAI(model="gpt-3.5-turbo-0125",openai_api_key=key)
     retriever = vectorstore.as_retriever()
     prompt = hub.pull("rlm/rag-prompt")
 
@@ -52,15 +55,26 @@ def qa_model(query,key):
     return answer
 
 
-with st.form("ASK"):
-    query=st.text_input("Enter Your Query?",placeholder="What are transformers")
-    x=st.form_submit_button("submit")
-    
-if aikey:
-    if x:
-        result=qa_model(query,aikey)
-        st.write(result)
-else:
-    st.warning("Enter the api key")
+def main():
+    st.title("TechBot Transformers")
+    with st.sidebar:
+        aikey=st.text_input("Enter key",placeholder="openai_api_key",type="password")
 
+    with st.form("ASK"):
+        query=st.text_input("Enter Your Query?",placeholder="What are transformers")
+        x=st.form_submit_button("submit")
 
+    if aikey:
+        if x:
+            try:
+                result=qa_model(query,aikey)
+                st.write(query)
+                st.write(result)
+            except:
+                st.error("Please enter a valid API")
+            
+    else:
+        st.warning("Enter the api key")
+
+if __name__ == '__main__':
+    main()

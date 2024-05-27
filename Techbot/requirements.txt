@@ -4,3 +4,7 @@ langchainhub
 langchain-openai 
 langchain-chroma 
 bs4
+langchain_core
+langchain_text-splitters
+DuckDuckGoSearchRun
+streamlit

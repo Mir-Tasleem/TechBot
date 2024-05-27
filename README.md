@@ -1,32 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechBot Transformers</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-        }
-        h1, h2, h3 {
-            color: #333;
-        }
-        code {
-            background: #f4f4f4;
-            border-radius: 5px;
-            padding: 2px 5px;
-        }
-        pre {
-            background: #f4f4f4;
-            border-radius: 5px;
-            padding: 10px;
-            overflow-x: auto;
-        }
-    </style>
-</head>
-<body>
+
+
     <h1>TechBot Transformers</h1>
     <p>TechBot Transformers is a Streamlit-based application designed to provide users with information and answers about transformers and prompt engineering. The application leverages various libraries such as LangChain, OpenAI, and Chroma to process and retrieve relevant data from specific web sources.</p>
 

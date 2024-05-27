@@ -1,31 +1,98 @@
-<h1>TechBot Transformers</h1>
-<p>The project aims to develop a question-answering system using LangChain tools and agents, along with OpenAI's GPT-3.5 model. The system retrieves relevant information from a set of blog posts and generates natural language answers to user queries. Streamlit is used to create a user-friendly interface for interacting with the system.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechBot Transformers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        code {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 2px 5px;
+        }
+        pre {
+            background: #f4f4f4;
+            border-radius: 5px;
+            padding: 10px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>TechBot Transformers</h1>
+    <p>TechBot Transformers is a Streamlit-based application designed to provide users with information and answers about transformers and prompt engineering. The application leverages various libraries such as LangChain, OpenAI, and Chroma to process and retrieve relevant data from specific web sources.</p>
 
-<h3>Key Components:</h3>
-<ol>
-   <li>
-    Data Loading and Preprocessing:
-  </li>
-  <ul>
-    <li>The WebBaseLoader is utilized to scrape content from a set of blog posts.</li>
-    <li>The content is chunked and indexed using RecursiveCharacterTextSplitter and Chroma for efficient retrieval.</li>
-  </ul>
-  <li>
-    Question Answering Pipeline:  
-  </li>
-  <ul>
-    <li>The qa_model function orchestrates the question-answering pipeline.</li>
-    <li>It initializes the LangChain retriever and loads the GPT-3.5 model from OpenAI.</li>
-    <li>A prompt template from rlm/rag-prompt is used to guide the question answering process.</li>
-    <li>The pipeline combines the retriever, prompt, and GPT-3.5 model to generate answers.</li>
-  </ul>
- <li>
-  User Interface:
-  </li>
-  <ul>
-    <li>Streamlit is used for creating the user interface.</li>
-  </ul>
-</ol>
+    <h2>Features</h2>
+    <ul>
+        <li>Web scraping and document loading from specified URLs</li>
+        <li>Text splitting for manageable document chunks</li>
+        <li>Embeddings and vector store for efficient retrieval</li>
+        <li>Integration with OpenAI's GPT-3.5 model</li>
+        <li>Interactive user interface built with Streamlit</li>
+        <li>Query processing and result display</li>
+    </ul>
 
-<img src="Techbot/techbot.png">
-<img src="Techbot/techbot 2.png">
+    <h2>Installation</h2>
+    <p>To run the application, you need to have Python installed. Follow the steps below to set up and run TechBot Transformers.</p>
+    <ol>
+        <li>
+            Clone the repository:
+            <pre><code>git clone https://github.com/yourusername/techbot-transformers.git
+cd techbot-transformers</code></pre>
+        </li>
+        <li>
+            Create and activate a virtual environment:
+            <pre><code>python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`</code></pre>
+        </li>
+        <li>
+            Install the required packages:
+            <pre><code>pip install -r requirements.txt</code></pre>
+        </li>
+    </ol>
+
+    <h2>Usage</h2>
+    <ol>
+        <li>Run the Streamlit app:
+            <pre><code>streamlit run main.py</code></pre>
+        </li>
+        <li>Open your web browser and go to <a href="http://localhost:8501">http://localhost:8501</a>.</li>
+        <li>Enter your OpenAI API key in the sidebar.</li>
+        <li>Enter your query in the input field and click submit.</li>
+    </ol>
+
+    <h2>Code Overview</h2>
+    <p>The main components of the application are as follows:</p>
+
+    <h3>Web Scraping and Document Loading</h3>
+    <p>The <code>WebBaseLoader</code> loads content from specified URLs, filtering the HTML content using BeautifulSoup.</p>
+
+    <h3>Text Splitting</h3>
+    <p>Documents are split into chunks using <code>RecursiveCharacterTextSplitter</code> to facilitate indexing and retrieval.</p>
+
+    <h3>Embeddings and Vector Store</h3>
+    <p>OpenAI embeddings are generated and stored in a Chroma vector store for efficient retrieval.</p>
+
+    <h3>LLM and Tools Integration</h3>
+    <ul>
+        <li><code>ChatOpenAI</code> is used to interact with OpenAI's GPT-3.5-turbo-0125 model.</li>
+        <li>A retriever tool is created using <code>create_retriever_tool</code>.</li>
+        <li><code>DuckDuckGoSearchRun</code> is added for web search capabilities.</li>
+        <li>An agent is created using <code>create_react_agent</code> with the LLM and tools.</li>
+    </ul>
+
+    <h3>User Interface</h3>
+    <p>Streamlit is used to create an interactive UI, allowing users to input their OpenAI API key and queries.</p>
+
+    <h3>Query Processing</h3>
+    <p>The agent processes the query using the LLM and tools, and the result is displayed in the Streamlit app.</p>
+
+    
